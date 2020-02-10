@@ -3,9 +3,21 @@
 //For example, binarySearch([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 4) would check if the target, 4, is in the top half
 //or lower half of the function, then return the half it is in and then check [1, 2, 3, 4, 5] and then split
 //in half again until 4 is found and returned.
-function binarySearch() {
-
+function binarySearch(arr, target) {
+    let middle = arr[Math.round(arr.length/2) - 1]
+    let solution;
+    if (middle === target) {
+        console.log(middle)
+        return solution = middle
+    } else if (middle > target) {
+        binarySearch(arr.slice(0, Math.round(arr.length/2) - 1), target)
+    } else {
+        binarySearch(arr.slice(Math.round(arr.length/2)), target)
+    }
+    return (solution) ? solution : false 
 }
+
+console.log(binarySearch([1, 2, 3, 4, 5, 6, 7, 8, 9], 4))
 
 //fizzBuzz is a common interview problem but is usually done with a 'for loop' and not recursively.
 //Create a recursive fizzBuzz. If you are unfamiliar, fizzBuzz loops through 1 - 100 and prints either
@@ -33,7 +45,7 @@ function patternCounter() {
 
 //Create a function that will turn the following object into a tree.
 //HINT: You can check out Fun Fun Function's recursion video.
-let testData = [
+/* let testData = [
     {name: 'numbers', parent: null},
     {name: 'evens', parent: 'numbers'},
     {name: 'odds', parent: 'numbers'},
@@ -47,7 +59,7 @@ let testData = [
     {name: 5, parent: 'odds'},
     {name: 7, parent: 'odds'},
     {name: 9, parent: 'odds'}
-];
+]; */
 
 function treeMaker() {
 
