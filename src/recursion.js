@@ -4,20 +4,17 @@
 //or lower half of the function, then return the half it is in and then check [1, 2, 3, 4, 5] and then split
 //in half again until 4 is found and returned.
 function binarySearch(arr, target) {
-    let middle = arr[Math.round(arr.length/2) - 1]
-    let solution;
-    if (middle === target) {
-        console.log(middle)
-        return solution = middle
+    let index = Math.round(arr.length/2)
+    let middle = arr[index - 1]
+    if (middle === target || middle === undefined) {
+        return (middle) ? middle : false
     } else if (middle > target) {
-        binarySearch(arr.slice(0, Math.round(arr.length/2) - 1), target)
+        return binarySearch(arr.slice(0, index - 1), target)
     } else {
-        binarySearch(arr.slice(Math.round(arr.length/2)), target)
+        return binarySearch(arr.slice(index), target)
     }
-    return (solution) ? solution : false 
 }
-
-console.log(binarySearch([1, 2, 3, 4, 5, 6, 7, 8, 9], 4))
+console.log(binarySearch([1, 2, 3, 5, 6, 7, 8, 9, 10], 4))
 
 //fizzBuzz is a common interview problem but is usually done with a 'for loop' and not recursively.
 //Create a recursive fizzBuzz. If you are unfamiliar, fizzBuzz loops through 1 - 100 and prints either
