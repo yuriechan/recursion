@@ -14,7 +14,8 @@ function binarySearch(arr, target) {
         return binarySearch(arr.slice(index), target)
     }
 }
-console.log(binarySearch([1, 2, 3, 5, 6, 7, 8, 9, 10], 4))
+
+//console.log(binarySearch([1, 2, 3, 5, 6, 7, 8, 9, 10], 4))
 
 //fizzBuzz is a common interview problem but is usually done with a 'for loop' and not recursively.
 //Create a recursive fizzBuzz. If you are unfamiliar, fizzBuzz loops through 1 - 100 and prints either
@@ -23,9 +24,27 @@ console.log(binarySearch([1, 2, 3, 5, 6, 7, 8, 9, 10], 4))
 //If a number is divisible by 5, print 'buzz'.
 //If a number is divisible by 3 and 5, print 'fizzbuzz'.
 //Otherwise print the number itself.
-function fizzBuzz() {
-
+function fizzBuzz(num) {
+    while (num >= 1 && num <= 7) {
+        if (num % 3 === 0 && num % 5 === 0) {
+            console.log('fizzbuzz')
+        } else if (num % 3 === 0) {
+            console.log('fizz')
+        } else if (num % 5 === 0) {
+            console.log('buzz')
+        } else {
+            console.log(num)
+        }
+        num++
+        return fizzBuzz(num)
+    }
+    return false
 }
+// study what happens to recursion without 'return' keyword //
+console.log(fizzBuzz(1))
+
+
+
 
 //Create a recursive funciton that will take any string and return a boolean based on whether or
 //not it is a palindrome.
