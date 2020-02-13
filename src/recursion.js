@@ -41,16 +41,31 @@ function fizzBuzz(num) {
     return false
 }
 // study what happens to recursion without 'return' keyword //
-console.log(fizzBuzz(1))
+//console.log(fizzBuzz(1))
 
 
 
 
 //Create a recursive funciton that will take any string and return a boolean based on whether or
 //not it is a palindrome.
-function palindrome() {
-
+function palindrome(str) {
+    let arr = Array.from(str)
+    //console.log(arr)
+    if (arr.length === 1) {
+        return true
+    } 
+    else {
+        if (arr[0] === arr[arr.length - 1]) {
+            arr.splice(0,1)
+            arr.splice(-1, 1)
+            console.log(arr)
+            palindrome(arr)
+        } else {
+            return false
+        }
+    }
 }
+console.log(palindrome('racecar'))
 
 //Create a function that takes two strings, the first being the test string and the second being the pattern to
 //search for. The function should return how many times the pattern appears in the string.
