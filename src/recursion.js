@@ -3,6 +3,8 @@
 //For example, binarySearch([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 4) would check if the target, 4, is in the top half
 //or lower half of the function, then return the half it is in and then check [1, 2, 3, 4, 5] and then split
 //in half again until 4 is found and returned.
+
+
 function binarySearch(arr, target) {
     let index = Math.round(arr.length/2)
     let middle = arr[index - 1]
@@ -15,7 +17,28 @@ function binarySearch(arr, target) {
     }
 }
 
-//console.log(binarySearch([1, 2, 3, 5, 6, 7, 8, 9, 10], 4))
+//[First Answer]
+// good) it's working as expected
+// bad) 1. middle will always be undefined when arr is empty
+//      2. If answer exists in the first element of array, it will still have to do a binary search
+// improvements to make) 
+// 1. What we care about 
+// (a) When do we need to do a binary search ?
+// -> if the target is in the 0'th index, no need to do a binary search (lucky!)
+// -> if the target was not in the 0'th index, and array holds more than one element.
+// -> if the target was not in the 0'th index, and array hold only one element, no need! 
+
+// 1. Create a condition of, 
+// (A) When array holds one element && that one element is the target 
+// (B) When array holds one element && that element was not the target => [END]
+// (C) When array holds more than one element && first element in the array was not the target  
+
+
+let testArr = []
+for (let i = 0; i < 10000; i ++) {
+    testArr.push(i)
+}
+binarySearch(testArr, 10000)
 
 //fizzBuzz is a common interview problem but is usually done with a 'for loop' and not recursively.
 //Create a recursive fizzBuzz. If you are unfamiliar, fizzBuzz loops through 1 - 100 and prints either
@@ -65,7 +88,7 @@ function palindrome(str) {
         }
     }
 }
-console.log(palindrome('racecar'))
+//console.log(palindrome('racecar'))
 
 //Create a function that takes two strings, the first being the test string and the second being the pattern to
 //search for. The function should return how many times the pattern appears in the string.
