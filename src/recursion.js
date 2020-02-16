@@ -5,17 +5,17 @@
 //in half again until 4 is found and returned.
 
 
-function binarySearch(arr, target) {
-    let index = Math.round(arr.length/2)
-    let middle = arr[index - 1]
-    if (middle === target || middle === undefined) {
-        return (middle) ? middle : false
-    } else if (middle > target) {
-        return binarySearch(arr.slice(0, index - 1), target)
-    } else {
-        return binarySearch(arr.slice(index), target)
-    }
-}
+// function binarySearch(arr, target) {
+//     let index = Math.round(arr.length/2)
+//     let middle = arr[index - 1]
+//     if (middle === target || middle === undefined) {
+//         return (middle) ? middle : false
+//     } else if (middle > target) {
+//         return binarySearch(arr.slice(0, index - 1), target)
+//     } else {
+//         return binarySearch(arr.slice(index), target)
+//     }
+// }
 
 //[First Answer]
 // good) it's working as expected
@@ -32,13 +32,30 @@ function binarySearch(arr, target) {
 // (A) When array holds one element && that one element is the target 
 // (B) When array holds one element && that element was not the target => [END]
 // (C) When array holds more than one element && first element in the array was not the target  
+// (D) When target was greater than all the element in the array => [END]
 
+function binarySearch(arr, target) {
+    if (arr.length === 1 && arr[0] === target) return arr[0]
+    if ((arr.length === 1 && arr[0] !== target) || target > arr[arr.length - 1]) return null
+    if (arr.length > 1 && arr[0] !== target) {
+        // binary search
+        if (arr[Math.floor(arr.length/2)] === target) return arr[Math.floor(arr.length/2)]
+        if (arr[Math.floor(arr.length/2)] > target) {
+            return binarySearch(arr.splice(0, Math.floor(arr.length/2)), target)
+        }
+        if (arr[Math.floor(arr.length/2)] < target) {
+            return binarySearch(arr.splice(Math.floor(arr.length/2)), target)
+        }
+    } else return null
+}
 
 let testArr = []
-for (let i = 0; i < 10000; i ++) {
+for (let i = 0; i < 101; i ++) {
     testArr.push(i)
 }
-binarySearch(testArr, 10000)
+// IN LINE 47) if add 1 to the index of middle element, it may access the undefined element of array in case the element was the last of array
+// IN LINE 44) if minus 1 to the index of middle element, it is no problem bc index is counted from 0 in array
+console.log(binarySearch(testArr, 1010))
 
 //fizzBuzz is a common interview problem but is usually done with a 'for loop' and not recursively.
 //Create a recursive fizzBuzz. If you are unfamiliar, fizzBuzz loops through 1 - 100 and prints either
