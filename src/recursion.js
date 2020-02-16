@@ -141,17 +141,27 @@ function fizzBuzz(num) {
 // [Improvements]
 // 1) added return statement, so the function in the call frame will pass value to have a recurive call
 // 2) Use the input as it is, which is string type, bc selecting an element by index number is still possible with strings. (Do not convert it into an array) 
+// function palindrome(str) {
+//     if (str.length === 1) {
+//         return true
+//     } 
+//     else {
+//         if (str.charAt(0) === str.charAt(str.length - 1)) {
+//             return palindrome(str.slice(1, str.length - 1))
+//         } else {
+//             return false
+//         }
+//     }
+// }
+
+// [Third solution]
+// 1) is - else can be omitted, but still performe same conditional
 function palindrome(str) {
-    if (str.length === 1) {
+    if (str.length === 1) 
         return true
-    } 
-    else {
-        if (str.charAt(0) === str.charAt(str.length - 1)) {
-            return palindrome(str.slice(1, str.length - 1))
-        } else {
-            return false
-        }
-    }
+    if (str.charAt(0) === str.charAt(str.length - 1)) 
+        return palindrome(str.slice(1, str.length - 1))
+    return false
 }
 console.log(palindrome('racear'))
 
