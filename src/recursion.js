@@ -33,7 +33,7 @@
 // (B) When array holds one element && that element was not the target => [END]
 // (C) When array holds more than one element && first element in the array was not the target  
 // (D) When target was greater than all the element in the array => [END]
-
+// [Second solution]
 function binarySearch(arr, target) {
     if (arr.length === 1 && arr[0] === target) return arr[0]
     if ((arr.length === 1 && arr[0] !== target) || target > arr[arr.length - 1]) return null
@@ -90,6 +90,7 @@ for (let i = 0; i < 101; i ++) {
 // 1) call the function within each conditional, to allow recusize function right after its job 
 // 2) `return fizzBuzz(num++)` ==> will result in infinite loop. Why? -> num++, means, use the value num, THEN, increment
 // 2.5) `return fizzBuzz(++num)` ==> will behave as expected -> ++num, means, increment the value of num, THEN, use the value
+// [Second solution]
 function fizzBuzz(num) {
     while (num >= 1 && num <= 100) {
         if (num % 3 === 0 && num % 5 === 0) {
@@ -107,31 +108,52 @@ function fizzBuzz(num) {
         }
     }
 }
-console.log(fizzBuzz(1))
+//console.log(fizzBuzz(1))
 
 
 
 
 //Create a recursive funciton that will take any string and return a boolean based on whether or
 //not it is a palindrome.
+// [First solution]
+// [good] It kind of looks good... using recursive function.
+// [bad] 
+// 1) This function always returns undefined, no matter what the input is.
+// 2) Since palindrome() called inside palindrome() does not have a return statement, its parent will return undefined.
+// 3) The first call gets a string type value, and the rest of the function call gets array value
+// 3.5) let arr = Array.from(str), will not be needed after the first call 
+// function palindrome(str) {
+//     let arr = Array.from(str)
+//     if (arr.length === 1) {
+//         return true
+//     } 
+//     else {
+//         if (arr[0] === arr[arr.length - 1]) {
+//             arr.splice(0,1)
+//             arr.splice(-1, 1)
+//             palindrome(arr)  <===== YOU NEED RETURN STATEMENT 
+//         } else {
+//             return false
+//         }
+//     }
+// }
+// [Second solution]
+// [Improvements]
+// 1) added return statement, so the function in the call frame will pass value to have a recurive call
+// 2) Use the input as it is, which is string type, bc selecting an element by index number is still possible with strings. (Do not convert it into an array) 
 function palindrome(str) {
-    let arr = Array.from(str)
-    //console.log(arr)
-    if (arr.length === 1) {
+    if (str.length === 1) {
         return true
     } 
     else {
-        if (arr[0] === arr[arr.length - 1]) {
-            arr.splice(0,1)
-            arr.splice(-1, 1)
-            console.log(arr)
-            palindrome(arr)
+        if (str.charAt(0) === str.charAt(str.length - 1)) {
+            return palindrome(str.slice(1, str.length - 1))
         } else {
             return false
         }
     }
 }
-//console.log(palindrome('racecar'))
+console.log(palindrome('racear'))
 
 //Create a function that takes two strings, the first being the test string and the second being the pattern to
 //search for. The function should return how many times the pattern appears in the string.
