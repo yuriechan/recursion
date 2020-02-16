@@ -163,14 +163,20 @@ function palindrome(str) {
         return palindrome(str.slice(1, str.length - 1))
     return false
 }
-console.log(palindrome('racear'))
+//console.log(palindrome('racear'))
 
 //Create a function that takes two strings, the first being the test string and the second being the pattern to
 //search for. The function should return how many times the pattern appears in the string.
 //Ex. patternCounter('I want to drive tomorrow', 'to') ==> 2
-function patternCounter() {
-
+// [First answer WITHOUT recursion]
+function patternCounter(sentence, pattern) {
+    let p = new RegExp(pattern, "g")
+    return sentence.match(p).length
 }
+
+// [Second answer WITH recursion]
+
+console.log(patternCounter('I want bobba and strawberry cake next month', 'bob'))
 
 //Create a function that will turn the following object into a tree.
 //HINT: You can check out Fun Fun Function's recursion video.
