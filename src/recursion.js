@@ -55,7 +55,7 @@ for (let i = 0; i < 101; i ++) {
 }
 // IN LINE 47) if add 1 to the index of middle element, it may access the undefined element of array in case the element was the last of array
 // IN LINE 44) if minus 1 to the index of middle element, it is no problem bc index is counted from 0 in array
-console.log(binarySearch(testArr, 1010))
+//console.log(binarySearch(testArr, 1010))
 
 //fizzBuzz is a common interview problem but is usually done with a 'for loop' and not recursively.
 //Create a recursive fizzBuzz. If you are unfamiliar, fizzBuzz loops through 1 - 100 and prints either
@@ -64,24 +64,50 @@ console.log(binarySearch(testArr, 1010))
 //If a number is divisible by 5, print 'buzz'.
 //If a number is divisible by 3 and 5, print 'fizzbuzz'.
 //Otherwise print the number itself.
+
+// [First Answer]
+// [good] The code works as expected.
+// [bad] The runtime can result longer bc for any conditional, it needs to read the rest of the if-else, to call itself again.
+// function fizzBuzz(num) {
+//     while (num >= 1 && num <= 100) {
+//         if (num % 3 === 0 && num % 5 === 0) {
+//             console.log('fizzbuzz')
+//         } else if (num % 3 === 0) {
+//             console.log('fizz')
+//         } else if (num % 5 === 0) {
+//             console.log('buzz')
+//         } else {
+//             console.log(num)
+//         }
+//         num++
+//         return fizzBuzz(num)
+//     }
+// }
+// study what happens to recursion without 'return' keyword //
+// A return statement passes a value back to the immediate caller of the call-frame. 
+// Without the return statement, the function is making a loop. 
+// [Improvements]
+// 1) call the function within each conditional, to allow recusize function right after its job 
+// 2) `return fizzBuzz(num++)` ==> will result in infinite loop. Why? -> num++, means, use the value num, THEN, increment
+// 2.5) `return fizzBuzz(++num)` ==> will behave as expected -> ++num, means, increment the value of num, THEN, use the value
 function fizzBuzz(num) {
-    while (num >= 1 && num <= 7) {
+    while (num >= 1 && num <= 100) {
         if (num % 3 === 0 && num % 5 === 0) {
             console.log('fizzbuzz')
+            return fizzBuzz(++num)
         } else if (num % 3 === 0) {
             console.log('fizz')
+            return fizzBuzz(++num)
         } else if (num % 5 === 0) {
             console.log('buzz')
+            return fizzBuzz(++num)
         } else {
             console.log(num)
+            return fizzBuzz(++num)
         }
-        num++
-        return fizzBuzz(num)
     }
-    return false
 }
-// study what happens to recursion without 'return' keyword //
-//console.log(fizzBuzz(1))
+console.log(fizzBuzz(1))
 
 
 
