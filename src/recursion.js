@@ -176,17 +176,32 @@ function patternCounter(sentence, pattern) {
 
 // [Second answer WITH recursion]
 // [bad] - counter is always assigned 0 
-function recPatternCounter (sentence, pattern) {
-    let counter = 0
+// [Improvements] - Use default parameter to set counter to 0 when counter parameter is undefined. 
+// If not undefined, use the updated counter in the recurring function.
+// function recPatternCounter (sentence, pattern) {
+//     let counter = 0
+//     while (sentence.length >= pattern.length) {
+//         if (sentence.slice(0, pattern.length) === pattern) counter++
+//         return recPatternCounter(sentence.slice(1), pattern)
+//     }
+//     return counter
+// }
+
+// [Third answer WITH recursion]
+function recPatternCounter (sentence, pattern, counter = 0) {
     while (sentence.length >= pattern.length) {
-        if (sentence.slice(0, pattern.length) === pattern) counter++
-        return recPatternCounter(sentence.slice(1), pattern)
+        if (sentence.slice(0, pattern.length) === pattern) {
+            counter++
+            return recPatternCounter(sentence.slice(pattern.length), pattern, counter)
+        } else {
+            return recPatternCounter(sentence.slice(1), pattern, counter)
+        }
     }
     return counter
 }
 
 // console.log(patternCounter('I want to drive tomorrow', 'to'))
-console.log(recPatternCounter('I want to drive tomorrow', 'to'))
+console.log(recPatternCounter('I want to drive toooooomorrow', 'ooo'))
 
 
 //Create a function that will turn the following object into a tree.
