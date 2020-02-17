@@ -175,8 +175,19 @@ function patternCounter(sentence, pattern) {
 }
 
 // [Second answer WITH recursion]
+// [bad] - counter is always assigned 0 
+function recPatternCounter (sentence, pattern) {
+    let counter = 0
+    while (sentence.length >= pattern.length) {
+        if (sentence.slice(0, pattern.length) === pattern) counter++
+        return recPatternCounter(sentence.slice(1), pattern)
+    }
+    return counter
+}
 
-console.log(patternCounter('I want bobba and strawberry cake next month', 'bob'))
+// console.log(patternCounter('I want to drive tomorrow', 'to'))
+console.log(recPatternCounter('I want to drive tomorrow', 'to'))
+
 
 //Create a function that will turn the following object into a tree.
 //HINT: You can check out Fun Fun Function's recursion video.
