@@ -201,12 +201,12 @@ function recPatternCounter (sentence, pattern, counter = 0) {
 }
 
 // console.log(patternCounter('I want to drive tomorrow', 'to'))
-console.log(recPatternCounter('I want to drive toooooomorrow', 'ooo'))
+//console.log(recPatternCounter('I want to drive toooooomorrow', 'ooo'))
 
 
 //Create a function that will turn the following object into a tree.
 //HINT: You can check out Fun Fun Function's recursion video.
-/* let testData = [
+let testData = [
     {name: 'numbers', parent: null},
     {name: 'evens', parent: 'numbers'},
     {name: 'odds', parent: 'numbers'},
@@ -220,16 +220,32 @@ console.log(recPatternCounter('I want to drive toooooomorrow', 'ooo'))
     {name: 5, parent: 'odds'},
     {name: 7, parent: 'odds'},
     {name: 9, parent: 'odds'}
-]; */
+]; 
 
-function treeMaker() {
-
+// Psuedo code 
+// 0. Find the root node (a node without a parent node)
+// 1. Create a tree object 
+// 1.5 Assign its name to the name property of tree object 
+// 2. Find a child node / children node with a name of the parent node found in 1. 
+// 2.5 Assign its children node to the children property of tree object 
+// 3. 
+function treeMaker(arr) {
+    if (arr.filter(e => e.parent === null)) {
+        let tree = {}
+        tree.name = arr.filter( e => e.parent === null)[0].name
+        tree.children = arr.filter( e => e.parent === tree.name)
+    } else {
+        tree.children.forEach( e => e.name === )
+    }
+    console.log(node)
 }
+
+treeMaker(testData)
 
 //Create a function that will search a tree you make with the following data for any value
 //and return that value if it exists.
 //Ex. treeSearcher(tree, 'car') ==> 'car'
-
+/*
 let testData = [
     {name: 'Uppercase', parent: null},
     {name: 'Lowercase', parent: null},
@@ -251,9 +267,9 @@ let testData = [
     {name: 'cow', parent: 'c'},
     {name: 'Car', parent: 'C'},
     {name: 'car', parent: 'c'}
-];
+]; */
 
-let tree = treeMaker(testData);
-function treeSearcher() {
+// let tree = treeMaker(testData);
+// function treeSearcher() {
     
-}
+// }
