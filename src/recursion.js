@@ -206,7 +206,7 @@ function recPatternCounter (sentence, pattern, counter = 0) {
 
 //Create a function that will turn the following object into a tree.
 //HINT: You can check out Fun Fun Function's recursion video.
-let testData = [
+/* let testData = [
     {name: 'numbers', parent: null},
     {name: 'evens', parent: 'numbers'},
     {name: 'odds', parent: 'numbers'},
@@ -220,7 +220,7 @@ let testData = [
     {name: 5, parent: 'odds'},
     {name: 7, parent: 'odds'},
     {name: 9, parent: 'odds'}
-]; 
+]; */ 
 
 // Psuedo code 
 // 0. Find the root node (a node without a parent node)
@@ -297,12 +297,12 @@ function treeMaker(arr, parent) {
     return tree
 }
 
-console.log(treeMaker(testData))
+//console.log(treeMaker(testData))
 
 //Create a function that will search a tree you make with the following data for any value
 //and return that value if it exists.
 //Ex. treeSearcher(tree, 'car') ==> 'car'
-/*
+
 let testData = [
     {name: 'Uppercase', parent: null},
     {name: 'Lowercase', parent: null},
@@ -324,9 +324,23 @@ let testData = [
     {name: 'cow', parent: 'c'},
     {name: 'Car', parent: 'C'},
     {name: 'car', parent: 'c'}
-]; */
+]
 
-// let tree = treeMaker(testData);
-// function treeSearcher() {
-    
-// }
+let tree = treeMaker(testData, null);
+
+function treeSearcher(tree, value, solution = '') {
+    for (const prop in tree) {
+        for (const subprop in tree[prop]) {
+            if (value.charAt(0) === subprop) {
+                for (const subsubprop in tree[prop][subprop]) {    
+                    if (value === subsubprop) {
+                        solution = subsubprop
+                    }
+                }
+            }
+        }
+    }
+    return solution
+}
+
+console.log(treeSearcher(tree, 'big'))
