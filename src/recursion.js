@@ -228,19 +228,76 @@ let testData = [
 // 1.5 Assign its name to the name property of tree object 
 // 2. Find a child node / children node with a name of the parent node found in 1. 
 // 2.5 Assign its children node to the children property of tree object 
-// 3. 
-function treeMaker(arr) {
-    if (arr.filter(e => e.parent === null)) {
-        let tree = {}
-        tree.name = arr.filter( e => e.parent === null)[0].name
-        tree.children = arr.filter( e => e.parent === tree.name)
-    } else {
-        tree.children.forEach( e => e.name === )
-    }
-    console.log(node)
+// 3. For each node inside the children property, find its children 
+// 3.5 If children is found, assign to the tree obj
+// Final output 
+/* {
+      name: numbers,
+      children: [ { 
+                    name: evens,
+                    children: [
+                        { name: 2, children: [] },
+                        { name: 4, children: [] },
+                        { name: 6, children: [] },
+                        { name: 8, children: [] },
+                        { name: 10, children: [] },
+                    ]
+                  },
+                  { 
+                    name: odds,
+                    children: [
+                        { name: 1, children: [] },
+                        { name: 3, children: [] },
+                        { name: 5, children: [] },
+                        { name: 7, children: [] },
+                        { name: 9, children: [] },
+                    ]
+                  }
+                ]   
+    } */ 
+
+// [First solution]
+// [bad] -> do not hard-code value of key, such as 'null' 
+// function treeMaker(arr) {
+//     let tree = {}
+//     tree.name = arr.filter(e => e.parent === null)[0].name
+//     tree.children = []
+//     arr.filter(e => e.parent === tree.name).forEach( e => tree.children.push({name : e.name}))
+
+//     return tree
+// }
+
+// [Second solution]
+// Final output should look like this
+/* {
+        numbers : { 
+                    evens: {
+                        { 2: {} },
+                        { 4: {} },
+                        { 6: {} },
+                        { 8: {} },
+                        { 10: {} },
+                    },
+                    odds: {
+                        { 1: {} },
+                        { 3: {} },
+                        { 5: {} },
+                        { 7: {} },
+                        { 9: {} },
+                    }
+                  }
+    } */
+
+// [Second solution]
+// Pass the parent as parameter, so it can always differ during tree traversal
+function treeMaker(arr, parent) {
+    let tree = {}
+    arr.filter( e => e.parent === parent)
+        .forEach( e => tree[e.name] = treeMaker(arr, e.name))
+    return tree
 }
 
-treeMaker(testData)
+console.log(treeMaker(testData))
 
 //Create a function that will search a tree you make with the following data for any value
 //and return that value if it exists.
